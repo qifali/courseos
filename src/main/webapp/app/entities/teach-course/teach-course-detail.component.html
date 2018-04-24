@@ -1,0 +1,66 @@
+
+<div *ngIf="teachCourse">
+    <h2><span jhiTranslate="courseosApp.teachCourse.detail.title">Teach Course</span> {{teachCourse.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="courseosApp.teachCourse.teachCourseCode">Teach Course Code</span></dt>
+        <dd>
+            <span>{{teachCourse.teachCourseCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.day">Day</span></dt>
+        <dd>
+            <span>{{teachCourse.day}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.time">Time</span></dt>
+        <dd>
+            <span>{{teachCourse.time}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.teachCourseType">Teach Course Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'courseosApp.TeachCourseType.' + teachCourse.teachCourseType}}">{{teachCourse.teachCourseType}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.fee">Fee</span></dt>
+        <dd>
+            <span>{{teachCourse.fee}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.desc">Desc</span></dt>
+        <dd>
+            <span>{{teachCourse.desc}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.count">Count</span></dt>
+        <dd>
+            <span>{{teachCourse.count}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.courseDue">Course Due</span></dt>
+        <dd>
+            <span>{{teachCourse.courseDue}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.teacher">Teacher</span></dt>
+        <dd>
+            <div *ngIf="teachCourse.teacher">
+                <a [routerLink]="['/teacher', teachCourse.teacher?.id]">{{teachCourse.teacher?.name}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teachCourse.course">Course</span></dt>
+        <dd>
+            <div *ngIf="teachCourse.course">
+                <a [routerLink]="['/course', teachCourse.course?.id]">{{teachCourse.course?.name}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'teach-course/'+ teachCourse.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

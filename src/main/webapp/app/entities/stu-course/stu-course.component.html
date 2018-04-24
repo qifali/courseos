@@ -1,0 +1,116 @@
+<div>
+    <h2>
+        <span jhiTranslate="courseosApp.stuCourse.home.title">Stu Courses</span>
+        <button class="btn btn-primary float-right jh-create-entity create-stu-course" [routerLink]="['/', { outlets: { popup: ['stu-course-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="courseosApp.stuCourse.home.createLabel">
+            Create new Stu Course
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="form-group col-sm-8">
+            <label for="phase">查询</label>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <ng-select [items]="students"
+                               bindLabel="chnName"
+                               bindValue="id"
+                               placeholder="输入学生姓名"
+                               [typeahead]="searchStudent"
+                               [(ngModel)]="query.student"
+                               (change) ="loadAll()">
+                    </ng-select>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" [(ngModel)]="query.phase" class="form-control" id="phase"  (keyup) ="loadAll()"
+                           placeholder="阶段">
+                </div>
+                <!--<div class="col-md-4">-->
+                    <!--<input type="text" [(ngModel)]="query.teachCourse" class="form-control" id="teachCourse"  (keyup) ="loadAll()"-->
+                           <!--placeholder="teachCourse">course-->
+                <!--</div>-->
+                <div class="col-md-4">
+                    <ng-select [items]="teachCourses"
+                               bindLabel="teachCourseCode"
+                               bindValue="id"
+                               placeholder="输入老师课程安排编号"
+                               [typeahead]="searchTeachCourse"
+                               [(ngModel)]="query.teachCourse"
+                               (change) ="loadAll()">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive" *ngIf="stuCourses">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="desc"><span jhiTranslate="courseosApp.stuCourse.desc">Desc</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="phase"><span jhiTranslate="courseosApp.stuCourse.phase">Phase</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="student.chnName"><span jhiTranslate="courseosApp.stuCourse.student">Student</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="teachCourse.teachCourseCode"><span jhiTranslate="courseosApp.stuCourse.teachCourse">Teach Course</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let stuCourse of stuCourses ;trackBy: trackId">
+                <td><a [routerLink]="['../stu-course', stuCourse.id ]">{{stuCourse.id}}</a></td>
+                <td>{{stuCourse.desc}}</td>
+                <td>{{stuCourse.phase}}</td>
+                <td>
+                    <div *ngIf="stuCourse.student">
+                        <a [routerLink]="['../student', stuCourse.student?.id ]" >{{stuCourse.student?.chnName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="stuCourse.teachCourse">
+                        <a [routerLink]="['../teach-course', stuCourse.teachCourse?.id ]" >{{stuCourse.teachCourse?.course.name}}--{{stuCourse.teachCourse?.teacher.name}}({{stuCourse.teachCourse?.teachCourseCode}})</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../stu-course', stuCourse.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'stu-course/'+ stuCourse.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'stu-course/'+ stuCourse.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="stuCourses && stuCourses.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

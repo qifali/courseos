@@ -1,0 +1,149 @@
+<div>
+    <h2>
+        <span jhiTranslate="courseosApp.student.home.title">Students</span>
+        <button class="btn btn-primary float-right jh-create-entity create-student"
+                [routerLink]="['/', { outlets: { popup: ['student-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span jhiTranslate="courseosApp.student.home.createLabel">
+            Create new Student
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+
+    <div class="row">
+
+        <div class="form-group col-sm-7">
+            <label for="chnName">学生信息查询</label>
+
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <input type="text" [(ngModel)]="studentQuery.stuCode" class="form-control" id="stuCode" (keyup) ="loadAll()"
+                           placeholder="学生编号">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" [(ngModel)]="studentQuery.chnName" class="form-control" id="chnName"  (keyup) ="loadAll()"
+                           placeholder="中文名称">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" [(ngModel)]="studentQuery.engName" class="form-control" id="engName"  (keyup) ="loadAll()"
+                           placeholder="英文名称">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" [(ngModel)]="studentQuery.grade" class="form-control" id="grade"  (keyup) ="loadAll()"
+                           placeholder="年级">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" [(ngModel)]="studentQuery.school" class="form-control" id="school"  (keyup) ="loadAll()"
+                           placeholder="学校">
+                </div>
+
+
+            </div>
+        </div>
+        <div class="form-group col-sm-2">
+            <label for="chnName">是否晚托班</label>
+
+            <div class="form-group row">
+
+                <div class="col-md-6">
+                    <select id="isAfterSchool" [(ngModel)]="studentQuery.isAfterSchool" name="isAfterSchool" (change) = "loadAll()"
+                            class="form-control">
+                        <option value="">未知</option>
+                        <option value="YES">晚托班</option>
+                        <option value="NO">非晚托班</option>
+                    </select>
+                </div>
+
+                <!--<div class="col-md-6">-->
+
+                    <!--<button class="btn btn-primary float-left jh-create-entity " (click)="test()">-->
+                        <!--<span class="fa fa-book"></span><span>Test</span>-->
+                    <!--</button>-->
+
+                <!--</div>-->
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="table-responsive" *ngIf="students">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="stuCode"><span jhiTranslate="courseosApp.student.stuCode">Stu Code</span> <span
+                        class="fa fa-sort"></span></th>
+                <th jhiSortBy="chnName"><span jhiTranslate="courseosApp.student.chnName">Chn Name</span> <span
+                        class="fa fa-sort"></span></th>
+                <th jhiSortBy="engName"><span jhiTranslate="courseosApp.student.engName">Eng Name</span> <span
+                        class="fa fa-sort"></span></th>
+                <th jhiSortBy="grade"><span jhiTranslate="courseosApp.student.grade">Grade</span> <span
+                        class="fa fa-sort"></span></th>
+                <th jhiSortBy="school"><span jhiTranslate="courseosApp.student.school">School</span> <span
+                        class="fa fa-sort"></span></th>
+                <th jhiSortBy="desc"><span jhiTranslate="courseosApp.student.desc">Desc</span> <span
+                        class="fa fa-sort"></span></th>
+                <th jhiSortBy="isAfterSchool"><span
+                        jhiTranslate="courseosApp.student.isAfterSchool">Is After School</span> <span
+                        class="fa fa-sort"></span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of students ;trackBy: trackId">
+                <td><a [routerLink]="['../student', student.id ]">{{student.id}}</a></td>
+                <td>{{student.stuCode}}</td>
+                <td>{{student.chnName}}</td>
+                <td>{{student.engName}}</td>
+                <td>{{student.grade}}</td>
+                <td>{{student.school}}</td>
+                <td>{{student.desc}}</td>
+                <td jhiTranslate="{{'courseosApp.IsAfterSchoolStatus.' + student.isAfterSchool}}">
+                    {{student.isAfterSchool}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../student', student.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'student/'+ student.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'student/'+ student.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="students && students.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5"
+                            [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                            [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,12 @@
             "home": "首页",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
-                "main": "数据",
+                "main": "管理",
+                "student": "学生",
+                "teacher": "教师",
+                "course": "课程",
+                "teachCourse": "教师课程安排",
+                "stuCourse": "学生课程安排",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

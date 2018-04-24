@@ -1,0 +1,66 @@
+entity Student {
+	stuCode String,
+    chnName String,
+    engName String,
+    grade String,
+    school String,
+    desc String,
+    isAfterSchool IsAfterSchoolStatus
+}
+
+entity Teacher {
+	teacherCode String,
+    name String,
+    subject String,
+    college String,
+    desc String,
+    isOnJob IsOnJobStatus
+}
+
+entity Course {
+	courseCode String,
+    name String,
+    desc String,
+    grade String
+}
+
+entity TeachCourse {
+	teachCourseCode String,
+    day String,
+    time String,
+    teachCourseType TeachCourseType,
+    fee String,
+    desc String,
+    count String,
+    courseDue String
+}
+
+entity StuCourse {
+    desc String,
+    phase String
+}
+
+relationship ManyToOne {
+	TeachCourse{Teacher(name)} to Teacher,
+    TeachCourse{Course(name)} to Course,
+	StuCourse{Student(chnName)} to Student,
+    StuCourse{TeachCourse(teachCourseCode)} to TeachCourse
+}
+
+enum IsAfterSchoolStatus {
+    YES, NO
+}
+
+enum IsOnJobStatus {
+    YES, NO
+}
+
+enum TeachCourseType{
+    ONE2MANY,ONE2ONE
+}
+
+paginate Student, Teacher, Course, TeachCourse, StuCourse with pagination
+
+service Student, Teacher, Course, TeachCourse, StuCourse with serviceClass
+
+filter Student, Teacher, Course, TeachCourse, StuCourse

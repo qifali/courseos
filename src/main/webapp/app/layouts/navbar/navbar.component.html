@@ -29,6 +29,36 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li>
+                        <a class="dropdown-item" routerLink="student" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.student">Student</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="teacher" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.teacher">Teacher</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="course" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.course">Course</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="teach-course" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.teachCourse">Teach Course</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="stu-course" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.stuCourse">Stu Course</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

@@ -1,0 +1,46 @@
+
+<div *ngIf="teacher">
+    <h2><span jhiTranslate="courseosApp.teacher.detail.title">Teacher</span> {{teacher.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="courseosApp.teacher.teacherCode">Teacher Code</span></dt>
+        <dd>
+            <span>{{teacher.teacherCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teacher.name">Name</span></dt>
+        <dd>
+            <span>{{teacher.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teacher.subject">Subject</span></dt>
+        <dd>
+            <span>{{teacher.subject}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teacher.college">College</span></dt>
+        <dd>
+            <span>{{teacher.college}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teacher.desc">Desc</span></dt>
+        <dd>
+            <span>{{teacher.desc}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.teacher.isOnJob">Is On Job</span></dt>
+        <dd>
+            <span jhiTranslate="{{'courseosApp.IsOnJobStatus.' + teacher.isOnJob}}">{{teacher.isOnJob}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'teacher/'+ teacher.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

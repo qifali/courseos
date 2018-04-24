@@ -1,0 +1,99 @@
+<div>
+    <h2>
+        <span jhiTranslate="courseosApp.course.home.title">Courses</span>
+        <button class="btn btn-primary float-right jh-create-entity create-course" [routerLink]="['/', { outlets: { popup: ['course-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="courseosApp.course.home.createLabel">
+            Create new Course
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+
+    <div class="row">
+
+        <div class="form-group col-sm-7">
+            <label for="courseCode">课程信息查询</label>
+
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <input type="text" [(ngModel)]="courseQuery.courseCode" class="form-control" id="courseCode" (keyup) ="loadAll()"
+                           placeholder="课程编号">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" [(ngModel)]="courseQuery.name" class="form-control" id="name"  (keyup) ="loadAll()"
+                           placeholder="课程名称">
+                </div>
+
+                <div class="col-md-2">
+                    <input type="text" [(ngModel)]="courseQuery.grade" class="form-control" id="grade"  (keyup) ="loadAll()"
+                           placeholder="年级">
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="table-responsive" *ngIf="courses">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="courseCode"><span jhiTranslate="courseosApp.course.courseCode">Course Code</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span jhiTranslate="courseosApp.course.name">Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="desc"><span jhiTranslate="courseosApp.course.desc">Desc</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="grade"><span jhiTranslate="courseosApp.course.grade">Grade</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let course of courses ;trackBy: trackId">
+                <td><a [routerLink]="['../course', course.id ]">{{course.id}}</a></td>
+                <td>{{course.courseCode}}</td>
+                <td>{{course.name}}</td>
+                <td>{{course.desc}}</td>
+                <td>{{course.grade}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../course', course.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'course/'+ course.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'course/'+ course.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="courses && courses.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

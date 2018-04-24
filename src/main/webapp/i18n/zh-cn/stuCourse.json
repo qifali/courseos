@@ -1,0 +1,25 @@
+
+{
+    "courseosApp": {
+        "stuCourse" : {
+            "home": {
+                "title": "学生课程安排",
+                "createLabel": "创建新 学生课程安排",
+                "createOrEditLabel": "创建或编辑 学生课程安排"
+            },
+            "created": "学生课程安排 {{ param }} 创建成功",
+            "updated": "学生课程安排 {{ param }} 更新成功",
+            "deleted": "学生课程安排 {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 学生课程安排 {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "学生课程安排"
+            },
+            "desc": "备注",
+            "phase": "课程阶段",
+            "student": "学生",
+            "teachCourse": "老师课程"
+        }
+    }
+}

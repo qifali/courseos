@@ -1,0 +1,25 @@
+
+{
+    "courseosApp": {
+        "course" : {
+            "home": {
+                "title": "课程",
+                "createLabel": "创建新 课程",
+                "createOrEditLabel": "创建或编辑 课程"
+            },
+            "created": "课程 {{ param }} 创建成功",
+            "updated": "课程 {{ param }} 更新成功",
+            "deleted": "课程 {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 课程 {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "课程详情"
+            },
+            "courseCode": "课程编号",
+            "name": "课程名称",
+            "desc": "备注",
+            "grade": "课程年级"
+        }
+    }
+}

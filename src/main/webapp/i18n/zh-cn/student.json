@@ -1,0 +1,28 @@
+
+{
+    "courseosApp": {
+        "student" : {
+            "home": {
+                "title": "学生",
+                "createLabel": "创建新 学生",
+                "createOrEditLabel": "创建或编辑 学生"
+            },
+            "created": "学生 {{ param }} 创建成功",
+            "updated": "学生 {{ param }} 更新成功",
+            "deleted": "学生 {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 学生 {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "学生详情"
+            },
+            "stuCode": "学生编号",
+            "chnName": "中文名",
+            "engName": "英文名",
+            "grade": "年级",
+            "school": "学校",
+            "desc": "备注",
+            "isAfterSchool": "是否晚托班"
+        }
+    }
+}

@@ -1,0 +1,102 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myTeachCourseLabel" jhiTranslate="courseosApp.teachCourse.home.createOrEditLabel">Create or edit a Teach Course</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!teachCourse.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="teachCourse.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.teachCourseCode" for="field_teachCourseCode">Teach Course Code</label>
+            <input type="text" class="form-control" name="teachCourseCode" id="field_teachCourseCode"
+                [(ngModel)]="teachCourse.teachCourseCode" readonly/>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.day" for="field_day">Day</label>
+            <input type="text" class="form-control" name="day" id="field_day"
+                [(ngModel)]="teachCourse.day" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.time" for="field_time">Time</label>
+            <input type="text" class="form-control" name="time" id="field_time"
+                [(ngModel)]="teachCourse.time" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.teachCourseType" for="field_teachCourseType">Teach Course Type</label>
+            <select class="form-control" name="teachCourseType" [(ngModel)]="teachCourse.teachCourseType" id="field_teachCourseType" >
+                <option value="ONE2MANY">{{'courseosApp.TeachCourseType.ONE2MANY' | translate}}</option>
+                <option value="ONE2ONE">{{'courseosApp.TeachCourseType.ONE2ONE' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.fee" for="field_fee">Fee</label>
+            <input type="text" class="form-control" name="fee" id="field_fee"
+                [(ngModel)]="teachCourse.fee" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.desc" for="field_desc">Desc</label>
+            <input type="text" class="form-control" name="desc" id="field_desc"
+                [(ngModel)]="teachCourse.desc" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.count" for="field_count">Count</label>
+            <input type="text" class="form-control" name="count" id="field_count"
+                [(ngModel)]="teachCourse.count" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.courseDue" for="field_courseDue">Course Due</label>
+            <input type="text" class="form-control" name="courseDue" id="field_courseDue"
+                [(ngModel)]="teachCourse.courseDue" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.teacher" >Teacher</label>
+            <!--<select class="form-control" id="field_teacher" name="teacher" [(ngModel)]="teachCourse.teacher" >-->
+                <!--<option [ngValue]="null"></option>-->
+                <!--<option [ngValue]="teacherOption.id === teachCourse.teacher?.id ? teachCourse.teacher : teacherOption" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.name}}</option>-->
+            <!--</select>bindValue="id"-->
+
+                <ng-select [items]="teachers"
+                           bindLabel="name"
+
+                           placeholder="输入教师姓名"
+                           [typeahead]="searchTeacher"
+                           [(ngModel)]="teachCourse.teacher"
+                           name="teacher"
+
+                           >
+                </ng-select>
+
+
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.teachCourse.course" >Course</label>
+            <!--<select class="form-control" id="field_course" name="course" [(ngModel)]="teachCourse.course" >-->
+                <!--<option [ngValue]="null"></option>-->
+                <!--<option [ngValue]="courseOption.id === teachCourse.course?.id ? teachCourse.course : courseOption" *ngFor="let courseOption of courses; trackBy: trackCourseById">{{courseOption.name}}</option>-->
+            <!--</select>-->
+            <ng-select [items]="courses"
+                       bindLabel="name"
+                       placeholder="输入课程姓名"
+                       [typeahead]="searchCourse"
+                       [(ngModel)]="teachCourse.course"
+                       name="course"
+                       >
+            </ng-select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

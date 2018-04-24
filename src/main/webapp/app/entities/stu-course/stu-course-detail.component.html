@@ -1,0 +1,42 @@
+
+<div *ngIf="stuCourse">
+    <h2><span jhiTranslate="courseosApp.stuCourse.detail.title">Stu Course</span> {{stuCourse.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="courseosApp.stuCourse.desc">Desc</span></dt>
+        <dd>
+            <span>{{stuCourse.desc}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.stuCourse.phase">Phase</span></dt>
+        <dd>
+            <span>{{stuCourse.phase}}</span>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.stuCourse.student">Student</span></dt>
+        <dd>
+            <div *ngIf="stuCourse.student">
+                <a [routerLink]="['/student', stuCourse.student?.id]">{{stuCourse.student?.chnName}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="courseosApp.stuCourse.teachCourse">Teach Course</span></dt>
+        <dd>
+            <div *ngIf="stuCourse.teachCourse">
+                <a [routerLink]="['/teach-course', stuCourse.teachCourse?.id]">{{stuCourse.teachCourse?.teachCourseCode}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'stu-course/'+ stuCourse.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

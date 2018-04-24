@@ -1,0 +1,62 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myStudentLabel" jhiTranslate="courseosApp.student.home.createOrEditLabel">Create or edit a Student</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!student.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="student.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.student.stuCode" for="field_stuCode">Stu Code</label>
+            <input type="text" class="form-control" name="stuCode" id="field_stuCode"
+                [(ngModel)]="student.stuCode" readonly/>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.student.chnName" for="field_chnName">Chn Name</label>
+            <input type="text" class="form-control" name="chnName" id="field_chnName"
+                [(ngModel)]="student.chnName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.student.engName" for="field_engName">Eng Name</label>
+            <input type="text" class="form-control" name="engName" id="field_engName"
+                [(ngModel)]="student.engName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.student.grade" for="field_grade">Grade</label>
+            <input type="text" class="form-control" name="grade" id="field_grade"
+                [(ngModel)]="student.grade" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.student.school" for="field_school">School</label>
+            <input type="text" class="form-control" name="school" id="field_school"
+                [(ngModel)]="student.school" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.student.desc" for="field_desc">Desc</label>
+            <input type="text" class="form-control" name="desc" id="field_desc"
+                [(ngModel)]="student.desc" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.student.isAfterSchool" for="field_isAfterSchool">Is After School</label>
+            <select class="form-control" name="isAfterSchool" [(ngModel)]="student.isAfterSchool" id="field_isAfterSchool" >
+                <option value="YES">{{'courseosApp.IsAfterSchoolStatus.YES' | translate}}</option>
+                <option value="NO">{{'courseosApp.IsAfterSchoolStatus.NO' | translate}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

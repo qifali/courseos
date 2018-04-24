@@ -1,0 +1,9 @@
+{
+    "courseosApp": {
+        "IsAfterSchoolStatus" : {
+            "null": "未知",
+            "YES": "晚托班",
+            "NO": "非晚托班"
+        }
+    }
+}

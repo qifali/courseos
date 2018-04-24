@@ -32,6 +32,7 @@
     "nativeLanguage": "zh-cn",
     "languages": [
       "zh-cn"
-    ]
+    ],
+    "enableHibernateCache": false
   }
 }

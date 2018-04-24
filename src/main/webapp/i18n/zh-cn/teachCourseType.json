@@ -1,0 +1,9 @@
+{
+    "courseosApp": {
+        "TeachCourseType" : {
+            "null": "",
+            "ONE2MANY": "一对多",
+            "ONE2ONE": "一对一"
+        }
+    }
+}

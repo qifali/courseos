@@ -1,0 +1,9 @@
+{
+    "courseosApp": {
+        "IsOnJobStatus" : {
+            "null": "未知",
+            "YES": "在职",
+            "NO": "离职"
+        }
+    }
+}

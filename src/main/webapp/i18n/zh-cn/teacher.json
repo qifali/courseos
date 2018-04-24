@@ -1,0 +1,27 @@
+
+{
+    "courseosApp": {
+        "teacher" : {
+            "home": {
+                "title": "教师",
+                "createLabel": "创建新 教师",
+                "createOrEditLabel": "创建或编辑 教师"
+            },
+            "created": "教师 {{ param }} 创建成功",
+            "updated": "教师 {{ param }} 更新成功",
+            "deleted": "教师 {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 教师 {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "教师"
+            },
+            "teacherCode": "教师编号",
+            "name": "教师姓名",
+            "subject": "授课学科",
+            "college": "毕业大学",
+            "desc": "备注",
+            "isOnJob": "是否在职"
+        }
+    }
+}

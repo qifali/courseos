@@ -1,0 +1,65 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myStuCourseLabel" jhiTranslate="courseosApp.stuCourse.home.createOrEditLabel">Create or edit a Stu Course</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!stuCourse.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="stuCourse.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.stuCourse.desc" for="field_desc">Desc</label>
+            <input type="text" class="form-control" name="desc" id="field_desc"
+                [(ngModel)]="stuCourse.desc" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.stuCourse.phase" for="field_phase">Phase</label>
+            <input type="text" class="form-control" name="phase" id="field_phase"
+                [(ngModel)]="stuCourse.phase" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.stuCourse.student">Student</label>
+            <!--<select class="form-control" id="field_student" name="student" [(ngModel)]="stuCourse.student" >-->
+                <!--<option [ngValue]="null"></option>-->
+                <!--<option [ngValue]="studentOption.id === stuCourse.student?.id ? stuCourse.student : studentOption" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.chnName}}</option>-->
+            <!--</select>-->
+                <ng-select [items]="students"
+                           bindLabel="chnName"
+                           placeholder="输入学生姓名"
+                           [typeahead]="searchStudent"
+                           [(ngModel)]="stuCourse.student"
+                           name="student"
+                           >
+                </ng-select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="courseosApp.stuCourse.teachCourse">Teach Course</label>
+            <!--<select class="form-control" id="field_teachCourse" name="teachCourse" [(ngModel)]="stuCourse.teachCourse" >-->
+                <!--<option [ngValue]="null"></option>-->
+                <!--<option [ngValue]="teachCourseOption.id === stuCourse.teachCourse?.id ? stuCourse.teachCourse : teachCourseOption" *ngFor="let teachCourseOption of teachcourses; trackBy: trackTeachCourseById">{{teachCourseOption.teachCourseCode}}</option>-->
+            <!--</select>-->
+            <ng-select [items]="teachcourses"
+                       bindLabel="teachCourseCode"
+                       placeholder="输入老师课程安排编号"
+                       [typeahead]="searchTeachCourse"
+                       [(ngModel)]="stuCourse.teachCourse"
+                       name="teachCourse"
+                        >
+            </ng-select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

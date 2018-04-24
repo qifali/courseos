@@ -1,0 +1,31 @@
+{
+    "courseosApp": {
+        "teachCourse" : {
+            "home": {
+                "title": "教师课程安排",
+                "createLabel": "创建新 教师课程安排",
+                "createOrEditLabel": "创建或编辑 教师课程安排"
+            },
+            "created": "教师课程安排 {{ param }} 创建成功",
+            "updated": "教师课程安排 {{ param }} 更新成功",
+            "deleted": "教师课程安排 {{ param }} 删除成功",
+            "delete": {
+                "question": "你确定要删除 教师课程安排 {{ id }} 吗？"
+            },
+            "detail": {
+                "title": "教师课程安排"
+            },
+            "teachCourseCode": "教师课程安排编码",
+            "day": "具体哪一天",
+            "time": "时间",
+            "teachCourseType": "课程类型",
+            "fee": "单节费用",
+            "desc": "备注",
+            "count": "次数",
+            "courseDue": "课程时长",
+            "teacher": "老师",
+            "course": "课程"
+        }
+    }
+}
+
